@@ -1,0 +1,3 @@
+/*select * from customer;*/
+/*delete from customer where id = 16;*/
+select * from customer_delivery_order;

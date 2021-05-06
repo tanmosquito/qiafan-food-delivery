@@ -1,0 +1,30 @@
+begin;
+create type discount_type as enum('CONTRACTUAL_DISCOUNT', 'PRICE_BREAK_DISCOUNT');
+create type distributor_type as enum('PLATFORM', 'THIRD_PARTY');
+create table coupon_pool(
+id serial primary key,
+name varchar not null,
+title varchar not null,
+publisher_id integer not null,
+business_id integer not null,
+discount_type discount_type not null,
+distributor_type distributor_type not null,
+total_amount integer not null default 1,
+available_left integer not null,
+available_per_account integer not null default 1,
+effective_timestamp timestamp with time zone,
+expiry_timestamp timestamp with time zone,
+disabled boolean not null default false,
+disabled_date_time timestamp with time zone,
+created_date_time timestamp with time zone,
+last_modified_date_time timestamp with time zone
+);
+create table business_wallet(
+owner_id integer not null primary key,
+total_amount money not null default 0.00,
+disabled boolean not null default false,
+disabled_datetime timestamp with time zone,
+created_datetime timestamp with time zone not null default now(),
+last_modified_datetime timestamp with time zone not null default now()
+)
+commit;
